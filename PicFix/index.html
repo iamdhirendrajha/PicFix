@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicFix</title>
+    <link rel="shortcut icon" href="./assets/PicFix_logo.png" type="image/x-icon">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Cropper JS Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+</head>
+
+<body class="font-poppins min-h-screen">
+    <div id="mainContent">
+    <!-- NAVBAR + HEADER -->
+    <header id="navSection">
+        <nav class="fixed top-0 left-0 w-full text-black flex items-center justify-between px-4 md:px-12 py-3 backdrop-blur-md z-50">
+            <div class="logo flex items-center">
+                <img src="./assets/PicFix_logo.png" alt="Logo" class="invert w-8 md:w-11">
+                <h2 class="font-bold text-xl md:text-2xl">PicFix</h2>
+                <!-- <i class="fa-solid fa-bars text-3xl" style="display:block;"></i> -->
+            </div>
+            <div class="items-center">
+                <div class="hidden font-semibold md:flex gap-10">
+                    <a href="/" class="hover:underline">Home</a>
+                    <a href="#featureSection" class="hover:underline">Features</a>
+                    <a href="#" class="hover:underline">Why Us</a>
+                    <a href="#" class="hover:underline">FAQs</a>
+                    <a href="#" class="hover:underline">Testimonials</a>
+                </div>
+            </div>
+
+            <div>
+                <a href="#featureSection" class="hidden md:block group px-6 py-2 rounded-full text-black font-semibold bg-transparent border border-black transition-all duration-300 hover:translate-x-1">
+                    Explore Tools  <i class="fa-solid fa-caret-right transition-all duration-300 group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="bg-gradient-to-b from-[#22C55E] from-0% to-white to-40%">
+    <section id="titleSection" class="max-w-6xl mx-auto pt-12 md:pt-16">
+        <div class="text-center pt-12 pb-10 md:py-10">
+            <span class="text-gray-800 text-[10px] md:text-sm"><i class="fa-solid fa-laptop-code"></i> Designed by -- Dhirendra Jha</span><br><br><br>
+            <h1 class="text-3xl md:text-5xl font-bold">Edit image Instantly with <span class="text-[#22C55E]">PicFix.</span></h1>
+            <p class="mt-2 mx-4 md:my-5 text-[12px] md:text-[15px]">The online Crop image tool transforms your images into the perfect size in seconds.</p>
+        </div>
+
+        <!-- Upload Box -->
+        <div class="md:grid md:grid-cols-[1fr_2fr] md:gap-10">
+
+            <!-- LEFT -->
+           <div class="mediaSection hidden md:block w-full h-80 overflow-hidden rounded-3xl">
+             <video class="w-full h-full object-cover rounded-3xl" src="./" autoplay loop muted playsinline></video>
+           </div>
+
+            <!-- RIGHT -->
+            <!-- REAL file input -->
+            <div id="uploadSection">
+            <input type="file" id="fileInput" accept="image/*" class="hidden"/>
+
+            <label for="fileInput" class="block max-w-2xl text-center rounded-3xl mx-5 md:m-0 p-4 md:p-6 bg-white shadow-lg border border-gray-300 rounded-3xl cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:shadow-xl">
+            <div class="border-4 border-dashed border-black pt-8 pb-6 rounded-3xl">
+
+            <h2 class="text-2xl font-bold">Drag and drop an image <br> or <span class="underline"> browse to upload.</span></h2>
+
+            <!-- This is NOT a button. It's styled as button but is actually a label -->
+            <span class="inline-block bg-black text-white px-3 py-2 md:px-5 md:py-3 mt-5 md:mt-7 mb-2 font-semibold rounded-full transition-all duration-200 hover:bg-[#22C55E] hover:text-black">
+            <i class="fa-solid fa-upload"></i> Upload Image
+            </span>
+
+            <p class="text-[11px] mb-5">File must be JPEG, JPG, PNG or WebP and up to 40MB</p>
+
+            <div class="text-[11px] md:text-sm">
+                <i class="fa-solid fa-circle-check text-sm text-[#22C55E]"></i> Free to use
+                <i class="fa-solid fa-circle-check text-sm text-[#22C55E] ml-3"></i> No credit card required
+            </div>
+            </div>
+            </label>       
+            </div>    
+        </div>
+    </section>
+</main>
+</div>
+
+
+<!-- Editing Dashboard ------------------------------------------------------------------>
+  <div id="editorPanel" class="fixed inset-0 z-50 bg-gray-100" style="display: none">
+    <!-- top bar -->
+    <div class="flex items-center justify-between px-4 py-3 bg-green-500 text-black shadow-sm">
+      <div class="flex items-center gap-3">
+        <button id="backToHome" class="text-black/90 text-xs md:text-sm md:text-[17px] px-3 py-1 rounded hover:bg-black/5"><i class="fa-solid fa-angle-left"></i> Back</button>
+      </div>
+
+      <!-- UNDO/REDO Button -->
+      <div class="flex items-center gap-2">
+        <button id="undoBtn" class="w-10 md:w-12 px-3 py-1 md:px-4 md:py-2 border rounded hover:bg-black/5" disabled><img src="./assets/icons8-undo-50.png" alt="icon"></i></button>
+        <button id="redoBtn" class="w-10 md:w-12 px-3 py-1 md:px-4 md:py-2 border rounded hover:bg-black/5" disabled><img src="./assets/icons8-redo-50.png" alt="icon"></i></button>
+      </div>
+
+      <!-- CHANGE + DOWNLOAD img -->
+      <div class="flex items-center gap-2">
+        <button id="uploadAnother" class="text-[10px] md:text-[15px] px-1 md:px-3 py-1 md:px-5 md:py-2 border rounded hover:bg-black/5">Change Image</button>
+        <button id="downloadBtn" class="text-[10px] md:text-[15px] px-1 md:px-3 py-1 md:px-5 md:py-2 bg-black text-white rounded hover:bg-gray-800"><i class="fa-regular fa-circle-down"></i> Download</button>
+      </div>
+    </div>
+
+    <!-- main editor: tools + canvas -->
+    <div class="grid grid-cols-1 md:grid-cols-[330px_1fr] h-[calc(100vh-64px)]">
+
+      <!-- left tools -->
+      <div class="p-4 bg-[#22C55E] overflow-auto">
+        <h4 class="font-semibold mb-3">Tools</h4>
+
+        <div class="space-y-3">
+          <!-- CROP Button -->
+          <button id="cropBtn" class="w-full py-2 rounded bg-white flex items-center justify-center gap-2"><i class="fa-solid fa-crop-simple"></i> Crop</button>
+          <div id="cropControls" class="hidden flex gap-2 mt-2">
+            <button id="cropOk" class="flex-1 py-2 bg-black text-white rounded">Ok</button>
+            <button id="cropCancel" class="flex-1 py-2 border border-white text-white rounded">Cancel</button>
+          </div>
+
+          <div class="bg-white p-3 rounded">
+            <h5 class="font-medium mb-2">Rotate & Flip</h5>
+            <div class="flex items-center justify-center gap-3">
+              <button id="rotateLeft" class="py-2 px-5 rounded bg-black text-white"><i class="fa-solid fa-rotate-left"></i></button>
+              <button id="rotateRight" class="py-2 px-5 rounded bg-black text-white"><i class="fa-solid fa-rotate-right"></i></button>
+              <button id="flipH" class="py-2 px-5 rounded bg-black text-white"><i class="fa-solid fa-arrows-left-right"></i></button>
+              <button id="flipV" class="py-2 px-5 rounded bg-black text-white"><i class="fa-solid fa-arrows-up-down"></i></button>
+            </div>
+          </div>
+
+          <button id="removeBgBtn" class="w-full py-2 rounded bg-white flex items-center justify-center gap-2"><i class="fa-solid fa-image"></i> Remove BG</button>
+
+          <div class="bg-white p-3 rounded">
+            <h5 class="font-medium mb-2">Adjustments</h5>
+            <label class="text-xs">Brightness <span id="bVal" class="ml-2 text-xs">100%</span></label>
+            <input id="brightness" type="range" min="0" max="200" value="100" class="w-full" />
+            <label class="text-xs mt-2">Contrast <span id="cVal" class="ml-2 text-xs">100%</span></label>
+            <input id="contrast" type="range" min="0" max="200" value="100" class="w-full" />
+            <label class="text-xs mt-2">Blur <span id="blVal" class="ml-2 text-xs">0px</span></label>
+            <input id="blur" type="range" min="0" max="10" step="0.5" value="0" class="w-full" />
+            <button id="autoRetouchBtn" class="mt-3 w-full py-2 bg-black text-white rounded"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto retouch</button>
+          </div>
+
+          <!-- COMPRESS Box -->
+          <div class="bg-white p-3 rounded">
+            <h5 class="font-medium mb-2">Compress</h5>
+  
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between items-center p-2 bg-gray-100 rounded">
+              <span class="text-xs">Original:</span>
+              <span id="originalSize" class="font-semibold">-- KB</span>
+            </div>
+    
+          <div class="flex justify-between items-center p-2 bg-gray-100 rounded">
+            <span class="text-xs">Target Size:</span>
+            <input id="targetSize" type="number" placeholder="KB" class="w-20 px-2 py-1 border rounded text-right" />
+          </div>
+          </div>
+  
+  <div id="compressControls" class="flex gap-2 mt-3">
+    <button id="compressOk" class="flex-1 py-2 bg-black text-white rounded">OK</button>
+    <button id="compressCancel" class="flex-1 py-2 border rounded">Cancel</button>
+  </div>
+</div>
+
+        </div>
+      </div>
+
+      <!-- right canvas area -->
+      <div id="canvasArea" class="p-6 flex items-center justify-center bg-gray-200 overflow-auto">
+        <!-- canvas + cropper image get inserted by JS -->
+      </div>
+
+      <!-- RESET ALL Button -->
+      <button id="resetBtnMain" class="text-sm md:text-lg fixed bottom-6 right-6 px-4 py-2 md:px-6 md:py-3 bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600 z-10">
+        <i class="fa-solid fa-rotate-right"></i> Reset All
+      </button>
+    </div>
+  </div>
+
+<!-- Javascript -->
+<script src="script.js"></script>
+</body>
+</html>

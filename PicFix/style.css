@@ -1,0 +1,11 @@
+ @layer utilities {
+    .font-syne {
+      font-family: 'Syne', sans-serif;
+    }
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+  }
+  j{
+    background-color: #15a248;
+  }
